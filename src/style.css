@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .message-user {
+      @apply text-left text-black w-full;
+    }
+    .message-assistant {
+      @apply bg-chat-bubble p-4 rounded-lg text-black shadow mb-2 w-full;
+    }
+    .message-model {
+      @apply text-xs text-gray-500;
+    }
+  }
+  
