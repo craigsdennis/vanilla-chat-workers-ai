@@ -1,4 +1,5 @@
 import { jsxRenderer } from "hono/jsx-renderer";
+import "./style.css";
 
 export const renderer = jsxRenderer(({ children, title }) => {
   return (
@@ -21,7 +22,7 @@ export const renderer = jsxRenderer(({ children, title }) => {
           referrerpolicy="no-referrer"
         />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-        <link rel="stylesheet" href="/src/style.css" />
+        <link href="/static/style.css" rel="stylesheet" />
       </head>
       <body className="font-sans">{children}</body>
     </html>

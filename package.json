@@ -2,11 +2,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "$npm_execpath run build:css && vite build",
+    "build:css": "tailwindcss -i src/style.css -o public/static/style.css",
     "preview": "wrangler pages dev dist",
     "deploy": "$npm_execpath run build && wrangler pages deploy dist"
   },
   "dependencies": {
+    "@cloudflare/ai": "^1.1.0",
+    "eventsource-parser": "^1.1.2",
     "hono": "^4.1.4"
   },
   "devDependencies": {
