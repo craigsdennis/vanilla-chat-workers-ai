@@ -4,7 +4,7 @@
     "dev": "vite",
     "build": "$npm_execpath run build:css && vite build",
     "build:css": "tailwindcss -i src/style.css -o public/static/style.css",
-    "preview": "wrangler pages dev dist",
+    "preview": "$npm_execpath run build && wrangler pages dev dist",
     "deploy": "$npm_execpath run build && wrangler pages deploy dist"
   },
   "dependencies": {
@@ -20,6 +20,6 @@
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3",
     "vite": "^5.0.12",
-    "wrangler": "^3.32.0"
+    "wrangler": "^3.41.0"
   }
 }
