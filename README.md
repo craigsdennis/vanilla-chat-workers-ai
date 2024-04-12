@@ -1,6 +1,6 @@
 # Vanilla JavaScript Chat Application using Cloudflare Workers AI
 
-A web based chat interface built on [Cloudflare Pages](https://page.cloudflare.com) that allows for exploring Text Generation Models on [Cloudflare Workers AI](https://developers.cloudflare.com/workers-ai/). Design is built using [tailwind](https://tailwindcss.com/).
+A web based chat interface built on [Cloudflare Pages](https://page.cloudflare.com) that allows for exploring [Text Generation models](https://developers.cloudflare.com/workers-ai/models/#text-generation) on [Cloudflare Workers AI](https://developers.cloudflare.com/workers-ai/). Design is built using [tailwind](https://tailwindcss.com/).
 
 This demo makes use of [LocalStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to maintain state. We have better solutions available (moar coming soon).
 
