@@ -48,10 +48,10 @@ npx wrangler pages deployment tail
 
 ## Advanced
 
-You can generate the list of models in [script.js](public/static/script.js) by running the following commands:
+If you are on a Mac, you can generate the list of models in [script.js](./public/static/script.js) by running the following commands:
 
 ```bash
-# If this is your first time here
+# If this is your first time here. You won't regret it.
 brew install jq
 ```
 
