@@ -1,10 +1,12 @@
 {
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently \"npm:preview\" \"npm:watch:vite\" \"npm:watch:css\"",
+    "watch:vite": "vite build --watch",
+    "watch:css": "tailwindcss -i src/style.css -o public/static/style.css --watch",
     "build": "$npm_execpath run build:css && vite build",
     "build:css": "tailwindcss -i src/style.css -o public/static/style.css",
-    "preview": "$npm_execpath run build && wrangler pages dev dist",
+    "preview": "wrangler pages dev --live-reload dist",
     "deploy": "$npm_execpath run build && wrangler pages deploy dist"
   },
   "dependencies": {
@@ -16,6 +18,7 @@
     "@hono/vite-cloudflare-pages": "^0.2.4",
     "@hono/vite-dev-server": "^0.9.0",
     "autoprefixer": "^10.4.19",
+    "concurrently": "^8.2.2",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3",
     "vite": "^5.0.12",
