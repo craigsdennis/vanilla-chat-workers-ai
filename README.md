@@ -56,13 +56,18 @@ brew install jq
 ```
 
 ```bash
-npx wrangler ai models --json | jq '
+# Filter all Text Generation models into "ga" and "beta"
+npx wrangler ai models --json | jq ' 
   reduce .[] as $item (
     {beta: [], ga: []};
-    if ($item.properties | any(.property_id == "beta" and .value == "true")) then
-      .beta += [$item.name]
+    if ($item.task.name == "Text Generation") then
+      if ($item.properties | any(.property_id == "beta" and .value == "true")) then
+        .beta += [$item.name]
+      else
+        .ga += [$item.name]
+      end
     else
-      .ga += [$item.name]
+      .
     end
   ) |
   .beta |= sort |
