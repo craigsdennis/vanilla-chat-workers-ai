@@ -1,11 +1,10 @@
-import { Ai } from "@cloudflare/ai";
 import { Hono } from "hono";
 import { streamText } from "hono/streaming";
 import { renderer } from "./renderer";
 import { EventSourceParserStream } from "eventsource-parser/stream";
 
 type Bindings = {
-  AI: Ai;
+  AI: any;
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
@@ -109,14 +108,13 @@ app.get("/", (c) => {
 
 app.post("/api/chat", async (c) => {
   const payload = await c.req.json();
-  const ai = new Ai(c.env.AI);
   const messages = [...payload.messages];
   // Prepend the systemMessage
   if (payload?.config?.systemMessage) {
     messages.unshift({ role: "system", content: payload.config.systemMessage });
   }
-  console.log("Model", payload.config.model);
-  console.log("Messages", JSON.stringify(messages));
+  //console.log("Model", payload.config.model);
+  //console.log("Messages", JSON.stringify(messages));
   let eventSourceStream;
   let retryCount = 0;
   let successfulInference = false;
@@ -124,7 +122,7 @@ app.post("/api/chat", async (c) => {
   const MAX_RETRIES = 3;
   while (successfulInference === false && retryCount < MAX_RETRIES) {
     try {
-      eventSourceStream = (await ai.run(payload.config.model, {
+      eventSourceStream = (await c.env.AI.run(payload.config.model, {
         messages,
         stream: true,
       })) as ReadableStream;

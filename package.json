@@ -8,9 +8,8 @@
     "deploy": "$npm_execpath run build && wrangler pages deploy dist"
   },
   "dependencies": {
-    "@cloudflare/ai": "^1.1.0",
     "eventsource-parser": "^1.1.2",
-    "hono": "^4.1.4"
+    "hono": "^4.2.3"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240208.0",
@@ -20,6 +19,6 @@
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3",
     "vite": "^5.0.12",
-    "wrangler": "^3.41.0"
+    "wrangler": "^3.50.0"
   }
 }
