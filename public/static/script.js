@@ -217,6 +217,7 @@ function updateModelDisplay(chatSettings) {
     display.innerText = chatSettings.model + " - ";
     const docsLink = document.createElement("a");
     docsLink.href = getDocsUrlForModel(chatSettings.model);
+    docsLink.target = "docs";
     docsLink.innerText = "Docs";
     display.append(docsLink);
   }
