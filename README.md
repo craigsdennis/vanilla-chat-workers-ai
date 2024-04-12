@@ -45,3 +45,27 @@ npm run deploy
 ```bash
 npx wrangler pages deployment tail
 ```
+
+## Advanced
+
+You can generate the list of models in [script.js](public/static/script.js) by running the following commands:
+
+```bash
+# If this is your first time here
+brew install jq
+```
+
+```bash
+npx wrangler ai models --json | jq '
+  reduce .[] as $item (
+    {beta: [], ga: []};
+    if ($item.properties | any(.property_id == "beta" and .value == "true")) then
+      .beta += [$item.name]
+    else
+      .ga += [$item.name]
+    end
+  ) |
+  .beta |= sort |
+  .ga |= sort
+'
+```
