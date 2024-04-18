@@ -5,6 +5,7 @@ const models = {
     "@cf/mistral/mistral-7b-instruct-v0.1",
   ],
   beta: [
+    "@cf/meta/llama-3-8b-instruct",
     "@cf/deepseek-ai/deepseek-math-7b-instruct",
     "@cf/defog/sqlcoder-7b-2",
     "@cf/google/gemma-2b-it-lora",
