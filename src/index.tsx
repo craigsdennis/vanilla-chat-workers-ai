@@ -2,9 +2,10 @@ import { Hono } from "hono";
 import { streamText } from "hono/streaming";
 import { renderer } from "./renderer";
 import { EventSourceParserStream } from "eventsource-parser/stream";
+import { Ai } from "@cloudflare/workers-types";
 
 type Bindings = {
-  AI: any;
+  AI: Ai;
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
