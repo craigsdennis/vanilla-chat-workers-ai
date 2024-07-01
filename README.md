@@ -4,7 +4,7 @@ A web based chat interface built on [Cloudflare Pages](https://pages.cloudflare.
 
 [<img src="https://img.youtube.com/vi/5UTExUQ8Fwo/0.jpg">](https://youtu.be/5UTExUQ8Fwo "Workers AI - Getting Started - Vanilla Chat App")
 
-This demo makes use of [LocalStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to maintain state. We have better solutions available (moar coming soon).
+This demo makes use of [LocalStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to maintain state. We have better solutions available (more coming soon).
 
 This is a template repository. Please feel free to create your own repository from this one by using the "Use this template" button. It's right next to the ⭐️ this repo button, which you could totally do as well if you wanted to.
 
