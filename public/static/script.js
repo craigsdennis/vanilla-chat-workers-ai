@@ -8,6 +8,7 @@ const models = {
     "@cf/meta-llama/llama-2-7b-chat-hf-lora",
     "@cf/meta/llama-3-8b-instruct",
     "@cf/meta/llama-3-8b-instruct-awq",
+    "@cf/meta/llama-3.1-8b-instruct",
     "@cf/microsoft/phi-2",
     "@cf/mistral/mistral-7b-instruct-v0.2-lora",
     "@cf/openchat/openchat-3.5-0106",
@@ -35,8 +36,12 @@ const models = {
     "@cf/meta/llama-2-7b-chat-fp16",
     "@cf/meta/llama-2-7b-chat-int8",
     "@cf/mistral/mistral-7b-instruct-v0.1",
+    "@hf/meta-llama/meta-llama-3-8b-instruct",
   ],
 };
+
+const CHAT_MODEL_DEFAULT = "@cf/meta/llama-3.1-8b-instruct";
+const SYSTEM_MESSAGE_DEFAULT = "You are a helpful assistant";
 
 const domReady = (callback) => {
   if (document.readyState === "loading") {
@@ -105,8 +110,10 @@ function createChatMessageElement(msg) {
 function retrieveChatSettings() {
   const settingsJSON = localStorage.getItem("chatSettings");
   if (!settingsJSON) {
-    // TODO: Defaults?
-    return {};
+    return {
+      model: CHAT_MODEL_DEFAULT,
+      systemMessage: SYSTEM_MESSAGE_DEFAULT,
+    };
   }
   return JSON.parse(settingsJSON);
 }
