@@ -13,18 +13,32 @@ const app = new Hono<{ Bindings: Bindings }>();
 app.use(renderer);
 
 app.get("/", (c) => {
+  const DEFAULT_MODEL = "@cf/meta/llama-3.1-8b-instruct"; // Default model
+  const DEFAULT_SYSTEM_MESSAGE = "You are a helpful assistant"; // Default system message
+
+  const handleChatSettings = () => {
+    const modelSelect = document.getElementById("model-select") as HTMLSelectElement;
+    const systemMessage = document.getElementById("system-message") as HTMLTextAreaElement;
+
+    // Logic to apply chat settings
+    const chatSettings = {
+      model: modelSelect.value,
+      systemMessage: systemMessage.value,
+    };
+
+    // Here you can add any additional logic to handle the chat settings
+    console.log("Chat settings applied:", chatSettings);
+  };
+
   return c.render(
     <>
-      <div className="flex h-screen bg-gray-200">
-        <div
-          className="flex-grow flex flex-col"
-          style="max-width: calc(100% - 20rem)"
-        >
+      <div className="flex flex-col h-screen bg-gray-200" id="chat-container">
+        <div className="flex-grow flex flex-col">
           <div
             id="chat-history"
-            className="flex-1 overflow-y-auto p-6 space-y-4 bg-white flex flex-col-reverse messages-container"
+            className="flex-1 overflow-y-auto p-4 space-y-4 bg-white flex flex-col-reverse messages-container"
           ></div>
-          <div className="px-6 py-2 bg-white shadow-up">
+          <div className="px-4 py-2 bg-white shadow-up">
             <form className="flex items-center" id="chat-form">
               <textarea
                 id="message-input"
@@ -37,23 +51,33 @@ app.get("/", (c) => {
               >
                 Send
               </button>
+              <button
+                type="button"
+                id="apply-chat-settings"
+                className="m-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
+                onClick={(e) => {
+                  e.preventDefault(); // Prevent form submission
+                  handleChatSettings(); // Call the function to apply changes
+                }}
+              >
+                Reset
+              </button>
             </form>
             <div className="text-xs text-gray-500 mt-2">
               <p className="model-display">-</p>
               <input
                 type="hidden"
-                class="message-user message-assistant message-model"
+                className="message-user message-assistant message-model"
               />
             </div>
           </div>
         </div>
-        <div className="w-80 bg-chat-settings p-6 shadow-xl flex flex-col justify-between">
+        <div className="w-full md:w-80 mx-auto bg-chat-settings p-4 shadow-xl flex flex-col justify-between chat-settings">
           <div>
             <div className="mb-4">
               <h2 className="text-xl font-semibold">Chat Settings</h2>
               <p className="text-sm text-chat-helpertext mt-1">
-                Try out different models and configurations for your chat
-                application
+                Try out different models and configurations for your chat application
               </p>
             </div>
             <form>
@@ -64,7 +88,10 @@ app.get("/", (c) => {
                 <select
                   id="model-select"
                   className="border border-chat-border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-                ></select>
+                >
+                  <option value={DEFAULT_MODEL}>{DEFAULT_MODEL}</option>
+                  {/* Add other model options here */}
+                </select>
               </div>
               <div className="mb-4">
                 <label className="block text-black text-sm font-bold mb-2">
@@ -82,6 +109,10 @@ app.get("/", (c) => {
               <button
                 id="apply-chat-settings"
                 className="w-full px-4 py-2 bg-chat-apply text-white rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline"
+                onClick={(e) => {
+                  e.preventDefault(); // Prevent form submission
+                  handleChatSettings(); // Call the function to apply changes
+                }}
               >
                 Apply Changes
               </button>
@@ -89,14 +120,12 @@ app.get("/", (c) => {
           </div>
           <div className="mt-4 text-center text-sm text-gray-500 flex items-center justify-center">
             <span className="mr-2 pt-2">Powered by</span>
-            <a
-              href="https://developers.cloudflare.com/workers-ai/"
-              target="_blank"
-            >
+            <a href="https://megavault.in/" target="_blank">
               <img
-                src="/static/cloudflare-logo.png"
-                alt="Cloudflare Logo"
-                className="h-6 inline"
+                src="/static/logo.png"
+                alt="Megavault Logo"
+                style={{ height: '20px', width: '20px' }} // Set height and width directly
+                className="inline"
               />
             </a>
           </div>
@@ -114,8 +143,6 @@ app.post("/api/chat", async (c) => {
   if (payload?.config?.systemMessage) {
     messages.unshift({ role: "system", content: payload.config.systemMessage });
   }
-  //console.log("Model", payload.config.model);
-  //console.log("Messages", JSON.stringify(messages));
   let eventSourceStream;
   let retryCount = 0;
   let successfulInference = false;
@@ -141,7 +168,6 @@ app.post("/api/chat", async (c) => {
     }
     throw new Error(`Problem with model`);
   }
-  // EventSource stream is handy for local event sources, but we want to just stream text
   const tokenStream = eventSourceStream
     .pipeThrough(new TextDecoderStream())
     .pipeThrough(new EventSourceParserStream());
