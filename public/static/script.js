@@ -1,14 +1,11 @@
-const models = {
-  beta: [
+{
+  "beta": [
     "@cf/deepseek-ai/deepseek-math-7b-instruct",
     "@cf/defog/sqlcoder-7b-2",
     "@cf/fblgit/una-cybertron-7b-v2-bf16",
     "@cf/google/gemma-2b-it-lora",
     "@cf/google/gemma-7b-it-lora",
     "@cf/meta-llama/llama-2-7b-chat-hf-lora",
-    "@cf/meta/llama-3-8b-instruct",
-    "@cf/meta/llama-3-8b-instruct-awq",
-    "@cf/meta/llama-3.1-8b-instruct",
     "@cf/microsoft/phi-2",
     "@cf/mistral/mistral-7b-instruct-v0.2-lora",
     "@cf/openchat/openchat-3.5-0106",
@@ -30,17 +27,26 @@ const models = {
     "@hf/thebloke/mistral-7b-instruct-v0.1-awq",
     "@hf/thebloke/neural-chat-7b-v3-1-awq",
     "@hf/thebloke/openhermes-2.5-mistral-7b-awq",
-    "@hf/thebloke/zephyr-7b-beta-awq",
+    "@hf/thebloke/zephyr-7b-beta-awq"
   ],
-  ga: [
+  "ga": [
     "@cf/meta/llama-2-7b-chat-fp16",
     "@cf/meta/llama-2-7b-chat-int8",
+    "@cf/meta/llama-3-8b-instruct",
+    "@cf/meta/llama-3-8b-instruct-awq",
+    "@cf/meta/llama-3.1-8b-instruct",
+    "@cf/meta/llama-3.1-8b-instruct-awq",
+    "@cf/meta/llama-3.1-8b-instruct-fp8",
+    "@cf/meta/llama-3.2-11b-vision-instruct",
+    "@cf/meta/llama-3.2-1b-instruct",
+    "@cf/meta/llama-3.2-3b-instruct",
+    "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
     "@cf/mistral/mistral-7b-instruct-v0.1",
-    "@hf/meta-llama/meta-llama-3-8b-instruct",
-  ],
-};
+    "@hf/meta-llama/meta-llama-3-8b-instruct"
+  ]
+}
 
-const CHAT_MODEL_DEFAULT = "@cf/meta/llama-3.1-8b-instruct";
+const CHAT_MODEL_DEFAULT = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
 const SYSTEM_MESSAGE_DEFAULT = "You are a helpful assistant";
 
 const domReady = (callback) => {
