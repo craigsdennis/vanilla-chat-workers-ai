@@ -1,4 +1,4 @@
-{
+const models = {
   "beta": [
     "@cf/deepseek-ai/deepseek-math-7b-instruct",
     "@cf/defog/sqlcoder-7b-2",
@@ -44,7 +44,7 @@
     "@cf/mistral/mistral-7b-instruct-v0.1",
     "@hf/meta-llama/meta-llama-3-8b-instruct"
   ]
-}
+};
 
 const CHAT_MODEL_DEFAULT = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
 const SYSTEM_MESSAGE_DEFAULT = "You are a helpful assistant";
