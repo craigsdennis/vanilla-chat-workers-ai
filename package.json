@@ -4,10 +4,10 @@
     "dev": "concurrently \"npm:preview\" \"npm:watch:vite\" \"npm:watch:css\"",
     "watch:vite": "vite build --watch",
     "watch:css": "tailwindcss -i src/style.css -o public/static/style.css --watch",
-    "build": "$npm_execpath run build:css && vite build",
+    "build": "npm run build:css && vite build",
     "build:css": "tailwindcss -i src/style.css -o public/static/style.css",
     "preview": "wrangler pages dev --live-reload dist",
-    "deploy": "$npm_execpath run build && wrangler pages deploy dist"
+    "deploy": "npm run build && wrangler pages deploy dist"
   },
   "dependencies": {
     "eventsource-parser": "^1.1.2",
